@@ -1,0 +1,2 @@
+CREATE TABLE "containers"( uid INTEGER PRIMARY KEY, name TEXT UNIQUE, band INTEGER, prio INTEGER, core INTEGER);
+CREATE TABLE tasks( uid INTEGER RIMARY KEY, wcet INTEGER, period INTEGER, prio INTEGER, container INTEGER, CONSTRAINT fk_containers FOREIGN KEY (container) REFERENCES "containers"(uid));

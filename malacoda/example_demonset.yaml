@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: malacoda
+  namespace: kube-system
+  labels:
+    k8s-app: malacoda
+spec:
+  selector:
+    matchLabels:
+      name: malacoda
+  template:
+    metadata:
+      labels:
+        name: malacoda
+    spec:
+      tolerations:
+      # this toleration is to have the daemonset runnable on master nodes
+      # remove it if your masters can't run pods
+      - key: node-role.kubernetes.io/master
+        operator: Exists
+        effect: NoSchedule
+      containers:
+      - name: malacoda
+        image: barlotto/k4.0s:latest
+        resources:
+          limits:
+            memory: 200Mi
+          requests:
+            cpu: 100m
+            memory: 200Mi
+        env:
+          - name: THIS_NODE
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.nodeName
+      imagePullSecrets:
+        - name: myregistrykey
+      terminationGracePeriodSeconds: 30
+ #     volumes:
+ #     - name: nodeinfo
+ #       downwardAPI:
+ #         items:
+ #           - path: "labels"
+ #             fieldRef:
+ #               fieldPath: metadata.labels
+ #           - path: "annotations"
+ #             fieldRef:
+ #               fieldPath: metadata.annotations
+  
