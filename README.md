@@ -1,4 +1,4 @@
-This repo refers to the paper **"Introducing k4.0s: a Model for Mixed-Criticality Container Orchestration in Industry 4.0"** @ ECRTS RT-Cloud
+This repo refers to the paper **"Introducing k4.0s: a Model for Mixed-Criticality Container Orchestration in Industry 4.0"** @ ADSN 2022
 
 # kube-scheduler-simulator-cli: Kubernetes Scheduler simulator on CLI and scenario system. 
 
